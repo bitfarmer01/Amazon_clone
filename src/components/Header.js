@@ -7,7 +7,7 @@ import {
 import { signIn, signout, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { selectItems } from "../slices/basketSlice";
+import { selectItems } from "../slices/cartSlice";
 const Header = () => {
   const [session] = useSession();
   const items = useSelector(selectItems);
