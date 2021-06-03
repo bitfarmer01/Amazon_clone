@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../slices/cartSlice";
-import { Flip, Slide, toast, ToastContainer } from "react-toastify";
+import { Flip, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Product = ({ id, title, price, description, category, image }) => {
   const dispatch = useDispatch();
