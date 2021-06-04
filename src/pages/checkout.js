@@ -53,6 +53,7 @@ function checkout() {
               Subtotal ({items.length} items):{" "}
             </span>
             <button
+              role="link"
               disabled={!session}
               className={`button ${
                 !session &&
