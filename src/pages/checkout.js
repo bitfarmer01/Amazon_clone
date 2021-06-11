@@ -5,11 +5,29 @@ import { useSelector } from "react-redux";
 import CheckoutProductList from "../components/CheckoutProductList";
 import Header from "../components/Header";
 import { selectItems } from "../slices/cartSlice";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
+const stripePromise = loadStripe(process.env.public_key);
 function checkout() {
   const items = useSelector(selectItems);
 
   const [session] = useSession();
+  const createCheckout = async () => {
+    const stripe = await stripePromise;
+    //call backend
+    const checkoutSession = await axios.post("/api/create-checkout-session", {
+      items: items,
+      email: session.user.email,
+    });
+
+    const result = await stripe.redirectToCheckout({
+      sessionId: await checkoutSession.data.id,
+    });
+    if (result.error) alert(result.error.message);
+    console.log(result);
+  };
+
   return (
     <div className="bg-gray-100 h-full">
       <Header />
@@ -36,6 +54,7 @@ function checkout() {
                       category={category}
                       image={image}
                       price={price}
+                      quantity={items.count}
                     />
                   )
                 )}
@@ -54,6 +73,7 @@ function checkout() {
             </span>
             <button
               role="link"
+              onClick={createCheckout}
               disabled={!session}
               className={`button ${
                 !session &&
@@ -70,6 +90,16 @@ function checkout() {
       </main>
     </div>
   );
+}
+export async function getServerSideProps(context) {
+  const categories = await fetch("https://fakestoreapi.com/products/categories")
+    .then((res) => res.json())
+    .catch((err) => console.log("Error while fetching products\n", err));
+  return {
+    props: {
+      categories,
+    },
+  };
 }
 
 export default checkout;

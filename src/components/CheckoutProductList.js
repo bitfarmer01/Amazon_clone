@@ -35,7 +35,7 @@ const CheckoutProductList = ({
       <div className="col-span-3 mx-5 ">
         <p className="font-semibold">{title}</p>
         <p className="text-sm my-2 line-clamp-3">{description}</p>
-        <p>₹{Math.floor(price * 75)}</p>
+        <p>₹{Math.floor(price)}</p>
       </div>
       <div className="flex flex-col space-y-2 my-auto justify-self-end">
         <button onClick={addItemtoCart} className="button mt-auto">
