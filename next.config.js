@@ -9,4 +9,7 @@ module.exports = {
       "pbs.twimg.com",
     ],
   },
+  env: {
+    public_key: process.env.STRIPE_PUBLIC_KEY,
+  },
 };

@@ -7,7 +7,7 @@ export default function Home({ products }) {
   return (
     <div className="bg-gray-100">
       <Head>
-        <title>Amazon 2.0</title>
+        <title>Amazon clone</title>
       </Head>
       <Header />
       <main className="max-w-5xl mx-auto">
@@ -17,6 +17,7 @@ export default function Home({ products }) {
     </div>
   );
 }
+// Tells nextJS that it's no longer a static page
 export async function getServerSideProps(context) {
   const products = await fetch("https://fakestoreapi.com/products").then(
     (res) => res.json()

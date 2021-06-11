@@ -10,7 +10,7 @@ const ProductList = ({ products }) => {
             key={id}
             id={id}
             title={title}
-            price={price}
+            price={price * 75}
             description={description}
             category={category}
             image={image}
