@@ -8,7 +8,7 @@ const Product = ({ id, title, price, description, category, image }) => {
   const dispatch = useDispatch();
 
   const addItemBasket = () => {
-    toast.success("Added to cart!");
+    toast.warning("Added to cart!");
     const product = {
       id,
       title,
